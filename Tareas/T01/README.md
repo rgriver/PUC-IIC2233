@@ -12,39 +12,65 @@ Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como s
 
 ## Clases
 
-`AnafMenu`
-
+`AnafMenu`  
 Corresponde al menu avanzado que se genera solo si un usuario Anaf accede. Contiene referencias a otras clases que permiten realizar acciones complejas como editar las bases de datos, planificar estrategias, etc.
 
-`BasicMenu`
+`BasicMenu`  
 Menú básico disponible solo si el usuario no es Anaf.
 
-Window
+`Window`  
 La ventana principal del programa (hereda de QMainWindow) que muestra el menú asignado a cada usuario. Cada vez que se inicia sesión se instancia un nuevo objecto (AnafMenu o BasicMenu) y llamamos al método `setCentralWidget()`.
 
-Login
+`Login`  
 Se encarga de controlar el acceso al programa al reviasar las bases de datos.
 
-UserDate
+`UserDate`  
 Clase derivada de QWidget y DateTime que almacena la fecha ingresada por el usuario.
 
-DataCollection
+`DataCollection`  
 Encapsula las bases de datos usadas.
 
-Database
+`Database`  
 Provee metodos para leer y editar los archivos.
 
-DateTime
+`DateTime`  
 Define métodos necesarios para trabajar con las fechas.
 
-FireChecker
+`FireChecker`  
 Revisa los reportes generados para conocer la información actual de los recursos.
 
-FireEditor
+`FireEditor`  
 Permite editar la base de datos de incendios y acceder a la información de incendios.
 
-Fires
+`Fires`  
 Es la base de datos de incendios, derivada de la clase Database.
 
+`ForecastEditor`  
+Esta clase permite agregar nuevos pronósticos.
 
+`Forecasts`  
+Base de datos de incendios.
 
+`Optimizer`  
+Es la superclase de cualquier optimizador (tiempo, costo y recursos). Define algunos parámetros de simulación como la referencia de tiempo (step size).
+
+`Planner`  
+Widget disponible solo en el menú Anaf que permite al usuario realizar la planificación de estrategias.
+
+`Resource Editor`  
+Editor de recursos
+
+`ResourceState`  
+Almacena el estado actual de un recurso de acuerdo a la fecha se defina.
+
+`Resources`  
+Base de datos de recursos
+
+`SimulationResource`
+Es usado por el optimizador para simular los eventos que cada recurso debe hacer para acabar con el incendio. Una instancia de `SimlationResource` por cada recurso al momento de simualar.
+
+`TimeOptimizer`  
+Clase derivada de Optimizer que se encarga de optimizar el tiempo necesario para acabar con el incencio.
+
+`Users`  
+Base de datos de usuarios.
