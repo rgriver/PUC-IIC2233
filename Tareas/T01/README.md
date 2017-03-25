@@ -13,6 +13,7 @@ Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como s
 ## Clases
 
 `AnafMenu`
+
 Corresponde al menu avanzado que se genera solo si un usuario Anaf accede. Contiene referencias a otras clases que permiten realizar acciones complejas como editar las bases de datos, planificar estrategias, etc.
 
 `BasicMenu`
