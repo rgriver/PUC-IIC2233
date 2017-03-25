@@ -9,31 +9,3 @@ Solo se implementó el algoritmo que minimiza el tiempo. Además falto el uso mo
 El código está está organizado de la siguiente forma: una clase, un archivo.
 
 Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como solución para arreglar el desastre que había provocado. No estoy seguro de las consecuencias de esto. Aparentemente ninguna, pero aconsejo tener esto en mente en caso de emergencia
-
-How to fix the 'empty file' problem:
-En las funciones (métodos) `view_active_fires` y `view_ex_fires` de la clase `FireEditor` (`fire_editor.py`) se debe cambiar lo siguiente:
-Para `view_active_fires`:
-Before:
-```
-.
-.
-.
-102                fire_id = next(f).strip()
-.
-.
-.
-```
-After:
-```
-.
-.
-.
-102                fire_id = next(f, None)
-                       if fire_id is None:
-                           break
-                   fire_id = fire_id.strip()
-.
-.
-.
-```
-Para la función `view_ex_fires` se debe hacer lo mismo, pero desde la línea 160.
