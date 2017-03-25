@@ -8,4 +8,42 @@ Solo se implementó el algoritmo que minimiza el tiempo. Además falto el uso mo
 
 El código está está organizado de la siguiente forma: una clase, un archivo.
 
-Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como solución para arreglar el desastre que había provocado. No estoy seguro de las consecuencias de esto. Aparentemente ninguna, pero aconsejo tener esto en mente en caso de emergencia
+Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como solución para arreglar el desastre que había provocado. No estoy seguro de las consecuencias de esto. Aparentemente ninguna, pero aconsejo tener esto en mente en caso de emergencia.
+
+## Clases
+
+´AnafMenu´´
+Corresponde al menu avanzado que se genera solo si un usuario Anaf accede. Contiene referencias a otras clases que permiten realizar acciones complejas como editar las bases de datos, planificar estrategias, etc.
+
+´BasicMenu´
+Menú básico disponible solo si el usuario no es Anaf.
+
+Window
+La ventana principal del programa (hereda de QMainWindow) que muestra el menú asignado a cada usuario. Cada vez que se inicia sesión se instancia un nuevo objecto (AnafMenu o BasicMenu) y llamamos al método ´setCentralWidget()´.
+
+Login
+Se encarga de controlar el acceso al programa al reviasar las bases de datos.
+
+UserDate
+Clase derivada de QWidget y DateTime que almacena la fecha ingresada por el usuario.
+
+DataCollection
+Encapsula las bases de datos usadas.
+
+Database
+Provee metodos para leer y editar los archivos.
+
+DateTime
+Define métodos necesarios para trabajar con las fechas.
+
+FireChecker
+Revisa los reportes generados para conocer la información actual de los recursos.
+
+FireEditor
+Permite editar la base de datos de incendios y acceder a la información de incendios.
+
+Fires
+Es la base de datos de incendios, derivada de la clase Database.
+
+
+
