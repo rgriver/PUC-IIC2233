@@ -12,14 +12,14 @@ Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como s
 
 ## Clases
 
-´AnafMenu´´
+`AnafMenu`
 Corresponde al menu avanzado que se genera solo si un usuario Anaf accede. Contiene referencias a otras clases que permiten realizar acciones complejas como editar las bases de datos, planificar estrategias, etc.
 
-´BasicMenu´
+`BasicMenu`
 Menú básico disponible solo si el usuario no es Anaf.
 
 Window
-La ventana principal del programa (hereda de QMainWindow) que muestra el menú asignado a cada usuario. Cada vez que se inicia sesión se instancia un nuevo objecto (AnafMenu o BasicMenu) y llamamos al método ´setCentralWidget()´.
+La ventana principal del programa (hereda de QMainWindow) que muestra el menú asignado a cada usuario. Cada vez que se inicia sesión se instancia un nuevo objecto (AnafMenu o BasicMenu) y llamamos al método `setCentralWidget()`.
 
 Login
 Se encarga de controlar el acceso al programa al reviasar las bases de datos.
