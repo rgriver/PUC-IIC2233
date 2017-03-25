@@ -10,3 +10,30 @@ El código está está organizado de la siguiente forma: una clase, un archivo.
 
 Comenté la línea 29 de basic_menu.py minutos antes de entregar la tarea como solución para arreglar el desastre que había provocado. No estoy seguro de las consecuencias de esto. Aparentemente ninguna, pero aconsejo tener esto en mente en caso de emergencia
 
+HOW TO FIX THE ISSUE:
+En las funciones `view_active_fires` y `view_ex_fires` en el archivo `fire_editor.py` se debe cambiar lo siguiente:
+Para `view_active_fires`:
+Before:
+```
+.
+.
+.
+102                fire_id = next(f).strip()
+.
+.
+.
+```
+After:
+```
+.
+.
+.
+102                fire_id = next(f, None)
+103                    if fire_id is None:
+104                    break
+105                fire_id = fire_id.strip()
+.
+.
+.
+```
+Line 102: `view_active_fires`
