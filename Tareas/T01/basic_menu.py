@@ -26,7 +26,7 @@ class BasicMenu(QWidget):
         self.fire_checker = FireChecker(self.fires, self.login)
         self.resource_label = QTextEdit()
         self.resource_label.setReadOnly(True)
-        self.update_resource_state()
+        #self.update_resource_state()
         resource_layout = QVBoxLayout()
         resource_layout.addWidget(QLabel('<b>Resource Information</b>'))
         resource_layout.addWidget(self.resource_label)
