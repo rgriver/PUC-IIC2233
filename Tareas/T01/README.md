@@ -1,6 +1,6 @@
 # Tarea 1
 
-En esta tarea se utilizó PyQt para implementar una bonita interfaz gráfica. Sin embargo, en algunos casos se usa la consola para mostrar información al usuario (se especifica cuando esto sucede en cada caso).
+En esta tarea se utilizó PyQt para implementar una bonita interfaz gráfica y así facilitar la corrección de la misma. Sin embargo, en algunos casos se usa la consola para mostrar información al usuario (se especifica cuando esto sucede en cada caso).
 
 Known issues. Existen algunos detalles que pueden provocar que el programa se caiga debido a cambios de ultimo minuto (Why?!!!!!!). El único problema conocido es la creación de un archivo en blanco en la carpeta donde se guardan los reportes. Si se crea manualmente un archivo como este o el programa genera uno cuando optimiza un incendio antes de que ocurra, al tratar de acceder información de incendios o recursos... crash! Esto sucede porque se intenta acceder información que no existe y se produce la excepcion `StopIteration` por usar `data = next(file)` (the file is empty!).
 
