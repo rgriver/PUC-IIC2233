@@ -87,4 +87,4 @@ if __name__ == "__main__":
 
     '''
 
-    #print(compare_actors(movies, casts, 'Anna Kendrick', 'Gwyneth Paltrow'))
+    # print(compare_actors(movies, casts, 'Anna Kendrick', 'Gwyneth Paltrow'))
