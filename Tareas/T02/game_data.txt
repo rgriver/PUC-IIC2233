@@ -1,0 +1,52 @@
+10330131159,10330131158,10330131158,10330131155,10330131136,10330131033,10330130472,10330130080,10330127606,10330118698,1033000645210330131158,10330131153,10330131123,10330131123,10330130963,10330130098,10330129163,10330126545,10330105335,10330038522,10329557466
+1,4,30,0,141,762,374,2226,18736,57905,368810
+0,1,0,3,19,103,561,392,2474,8908,112246
+10,False,Bacteria,True,49.99955161750333,False,9,
+Colombia,Clean,51911006,0,0,False,False,False,False,Unvisited,False
+Austria,Clean,68523682,0,0,False,False,False,False,Unvisited,False
+Turkey,Clean,372486428,0,0,False,False,False,False,Unvisited,False
+China,Clean,251853235,0,0,False,False,False,False,Unvisited,False
+New Zealand,Clean,214124570,0,0,False,False,False,False,Unvisited,False
+Germany,Clean,386117713,0,0,False,False,False,False,Unvisited,False
+Italy,Clean,63180851,0,0,False,False,False,False,Unvisited,False
+Norway,Clean,233198037,0,0,False,False,False,False,Unvisited,False
+Chile,Infected,121379768,124707,448986,False,False,False,False,Unvisited,False
+France,Clean,249532739,0,0,False,False,False,False,Unvisited,False
+South Africa,Clean,231171128,0,0,False,False,False,False,Unvisited,False
+Tanzania,Clean,301004350,0,0,False,False,False,False,Unvisited,False
+Mexico,Clean,336716690,0,0,False,False,False,False,Unvisited,False
+Brazil,Clean,196269350,0,0,False,False,False,False,Unvisited,False
+Costa Rica,Clean,104858133,0,0,False,False,False,False,Unvisited,False
+Netherlands,Clean,266673965,0,0,False,False,False,False,Unvisited,False
+North Korea,Clean,124773902,0,0,False,False,False,False,Unvisited,False
+Canada,Clean,373870960,0,0,False,False,False,False,Unvisited,False
+Iran,Clean,306062560,0,0,False,False,False,False,Unvisited,False
+Uruguay,Clean,103703397,0,0,False,False,False,False,Unvisited,False
+Nepal,Clean,250985137,0,0,False,False,False,False,Unvisited,False
+United Arab Emirates,Clean,69521519,0,0,False,False,False,False,Unvisited,False
+Portugal,Clean,176458156,0,0,False,False,False,False,Unvisited,False
+Japan,Clean,285590802,0,0,False,False,False,False,Unvisited,False
+Egypt,Clean,185855172,0,0,False,False,False,False,Unvisited,False
+Finland,Clean,199093326,0,0,False,False,False,False,Unvisited,False
+Croatia,Clean,289562943,0,0,False,False,False,False,Unvisited,False
+Hong Kong,Clean,389553524,0,0,False,False,False,False,Unvisited,False
+Argentina,Clean,271213737,0,0,False,False,False,False,Unvisited,False
+Ecuador,Clean,259550872,0,0,False,False,False,False,Unvisited,False
+Kenya,Clean,297070781,0,0,False,False,False,False,Unvisited,False
+Spain,Clean,124392024,0,0,False,False,False,False,Unvisited,False
+Saudi Arabia,Clean,146506593,0,0,False,False,False,False,Unvisited,False
+Bolivia,Clean,155552819,0,0,False,False,False,False,Unvisited,False
+India,Clean,50013586,0,0,False,False,False,False,Unvisited,False
+United Kingdom,Clean,113443397,0,0,False,False,False,False,Unvisited,False
+Australia,Clean,325929549,0,0,False,False,False,False,Unvisited,False
+South Korea,Clean,199554534,0,0,False,False,False,False,Unvisited,False
+Denmark,Clean,349698260,0,0,False,False,False,False,Unvisited,False
+Sweden,Clean,360781642,0,0,False,False,False,False,Unvisited,False
+Switzerland,Clean,68796978,0,0,False,False,False,False,Unvisited,False
+Russia,Clean,153350124,0,0,False,False,False,False,Unvisited,False
+Thailand,Clean,368144506,0,0,False,False,False,False,Unvisited,False
+Qatar,Clean,54547155,0,0,False,False,False,False,Unvisited,False
+United States,Clean,285844948,0,0,False,False,False,False,Unvisited,False
+Greece,Clean,92014682,0,0,False,False,False,False,Unvisited,False
+Israel,Clean,79677727,0,0,False,False,False,False,Unvisited,False
+Libya,Clean,369889495,0,0,False,False,False,False,Unvisited,False
