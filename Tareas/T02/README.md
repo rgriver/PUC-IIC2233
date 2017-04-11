@@ -1,4 +1,4 @@
-#Tarea 2
+# Tarea 2
 
 Como en la tarea anterior se utilizó PyQt5 para su comodidad :). En este caso solo se utilizó para recibir inputs del jugador, pues se usó la consola para mostrar la información. Las dos clases principales son ´View´ y ´Game´. La primera encapsula todo lo relacionado con la interfaz gráfica (´PyQt5´), mientras de la segunda es la lógica del juego (y la parte de output también).
 
