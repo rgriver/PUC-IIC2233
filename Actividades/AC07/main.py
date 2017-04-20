@@ -94,6 +94,7 @@ def verificar_inversion(f):
                 raise Exception('Supera el límite de inversión')
         if cuenta_ok and saldo_ok and clave_ok and limite_ok:
             f(self, cuenta, monto, clave)
+            print('Inversión realizada')
 
     return new_invertir
 
