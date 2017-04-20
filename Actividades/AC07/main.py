@@ -74,7 +74,7 @@ def verificar_transferencia(f):
             raise Exception('Clave incorrecta')
         if val_origen and val_destino and fondos and clave_ok:
             f(self, origen, destino, monto, clave)
-            print('Cuenta creada correctamente')
+            print('Transferencia realizada')
 
     return new_transferir
 
@@ -109,6 +109,7 @@ def verificar_cuenta(f):
             raise Exception('RUT no cumple con el formato')
         if clave_ok and rut_ok:
             f(self, nombre, rut, clave, numero_final, saldo_inicial)
+            print('Cuenta creada correctamente')
     return new_crear_cuenta
 
 
