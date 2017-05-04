@@ -119,6 +119,9 @@ class Simulation:
         print('Numero de llegados a la base a pie: ', count_walkers)
         print('Numero de llegados a la base que son generosos: ', count_generoso)
         print('Numero de llegados a la base que son egoistas: ', count_egoista)
+        print('\n')
+
+        self.__init__()
 
 class Person:
     def __init__(self):
