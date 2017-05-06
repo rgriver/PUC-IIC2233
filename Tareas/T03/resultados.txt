@@ -1,0 +1,16 @@
+-------- CONSULTA 1--------
+asignar
+-------- CONSULTA 2--------
+asignar
+-------- CONSULTA 3--------
+False
+-------- CONSULTA 4--------
+asignar
+-------- CONSULTA 5--------
+asignar
+-------- CONSULTA 6--------
+2500.759466337619
+-------- CONSULTA 7--------
+0.05509159919340519
+-------- CONSULTA 8--------
+1249.9998915992685
