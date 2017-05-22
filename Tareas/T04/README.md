@@ -2,9 +2,9 @@
 
 Como en las tareas anteriores se utilizó PyQt5 para la interfaz que se implementa en la clase View. La clase principal es `Simulator` que posee métodos encargados de realizar las acciones que el usuario solicite. Cada evento es representado con una clase particular. Todas estas clases tienen el método `simulate` que realiza los cambios correspondientes a ese evento. Los parámetros se obtienen de la clase `Parameters` que lee los archivos escenarios.csv y parametros.csv.
 
-# Programacion
+## Programacion
+asssa <span style="color:blue">e *blue* e</span>.
 
-<p>blarg <span style="color:blue">some <em>blue</em> text</span>.</p>
 
 
 <head>
