@@ -4,6 +4,9 @@ Como en las tareas anteriores se utilizó PyQt5 para la interfaz que se implemen
 
 # Programacion
 
+<p>blarg <span style="color:blue">some <em>blue</em> text</span>.</p>
+
+
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=macintosh">
 <meta name=ProgId content=Excel.Sheet>
