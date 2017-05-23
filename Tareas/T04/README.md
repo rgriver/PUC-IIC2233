@@ -4,6 +4,8 @@ Como en las tareas anteriores se utilizó PyQt5 para la interfaz que se implemen
 
 ## Programación
 
+![alt text](https://github.com/IIC2233/rgriver-iic2233-2017-1/blob/master/Tareas/T04/eventos.png "Programación")
+
 Aquí se muestra la programación de los eventos. Esto claramente puede cambiar en casos como el atraso de la publicación de notas. En la imagen no se muestra el evento examen.
 
 ## Detalles
