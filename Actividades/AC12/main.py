@@ -64,12 +64,12 @@ image_data = []
 
 position = 0
 while True:
-    if len(audio_data) <= 9854:
+    if len(audio_data) <= 9523:
         # print(len(audio_data))
         prime_num = next(prime)
-        if len(audio_data) == 9854:
-            audio_data += temp2[position:position + 71]
-            position += 71
+        if len(audio_data) == 9523:
+            audio_data += temp2[position:position + 260]
+            position += 260
         else:
             audio_data += temp2[position:position + prime_num]
             position += prime_num
