@@ -30,7 +30,6 @@ class Message:
             y = (x + n) % 26
             new_content += chr(y)
         new.update({'content': new_content})
-        print(new)
         return new
 
     def __setstate__(self, state):
