@@ -1,6 +1,6 @@
 # Tarea 5
 
-Se dividió la parte gráfica de la lógica del juego. Existen dos clases principales: `View` y `Game` que representan el frontend y el backend respectivamente.
+Se dividió la parte gráfica de la lógica del juego. Existen dos clases principales: `View` y `Game` que representan el frontend y el backend respectivamente. Se decidió usar QTimers que se encuentran el el backend.
 
 ## Información importante
 El comportamiento del enemigo puede ser Noob o Pro. Se testeó bastante el Noob, pero el Pro no tanto. Por eso es que no se asegura un funcionamiento perfecto si el enemigo es Pro. Para definir un comportamiento se debe cambiar en la clase `EnemyController` el atributo `behavior` que es definido de la siguiente manera: `self.behavior = random.chose([NoobBehavior(), ProBehavior()])`.
