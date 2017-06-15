@@ -20,8 +20,9 @@ class PrograPedia:
         }
         response = requests.get(self.url, params=xparams)
         r = response.json()
-        print(r)
-        #print(r['query']['pages']['276780']['extract'])
+        #print(r)
+        idx = list(r['query']['pages'].keys())[0]
+        print((r['query']['pages'][str(idx)]['extract']))
 
 
 class PrograPagina:
@@ -50,3 +51,4 @@ if __name__ == '__main__':
         print('Ingrese termino:')
         info = input()
         pp.receive(info)
+
