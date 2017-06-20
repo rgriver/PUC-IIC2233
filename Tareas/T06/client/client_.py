@@ -6,7 +6,7 @@ import os
 
 
 class Client(QObject):
-    HOST = '10.221.8.54'#'192.168.0.11'
+    HOST = '192.168.0.11'
     PORT = 3490
 
     menu_creation_requested = pyqtSignal(list)
