@@ -7,7 +7,7 @@ from server.room import Room
 
 
 class Server:
-    HOST = '10.221.8.54' #'192.168.0.11'
+    HOST = '192.168.0.11'
     PORT = 3490
 
     def __init__(self):
