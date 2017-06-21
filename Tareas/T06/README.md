@@ -9,3 +9,7 @@ Cuando se está enviando la canción al cliente se debe tener cuidado de no cerr
 El tiempo que se de demora en descargar la canción es de aproximadamente 10 segundos.
 
 El HOST y el PORT se editan en los módulos ``server_.py`` y ``client_.py``
+
+En el directorio songs solo deben existir carpetas con canciones. El nombre de cada carpeta se usa para llamar a cada salón.
+
+El artista y el título de la canción se obtienen del nombre del archivo wav. El '-' en el nombre del archivo se usa para separar el artista y el título.
