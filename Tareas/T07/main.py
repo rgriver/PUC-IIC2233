@@ -31,6 +31,7 @@ def handle_github_event():
 @app.route('/telegram')
 def handle_telegram_event():
     data = json.loads(flask.request.data)
+    return 'jjj'
 
 
 if __name__ == '__main__':
