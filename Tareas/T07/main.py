@@ -3,21 +3,19 @@ import requests
 import json
 
 
-class Server:
+class BotController:
     def __init__(self):
-        self.app = flask.Flask(__name__)
-        self.bot_controller = None
+        self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
+        self.telegram_url = 'https://api.telegram.org/bot' + self.token
 
-    def handle_github_event(self):
-        @self.app.route('/')
-        def index():
-            return 'Hello'
+    def send_message(self, chat_id, text):
+        params = {'chat_id': chat_id, 'text': text}
+        method = 'sendMessage'
+        requests.post(self.telegram_url + method, params)
 
-    def run(self):
-        self.app.run(host='0.0.0.0', port=8080)
-
-"""
 app = flask.Flask(__name__)
+bot_controller = BotController()
+
 
 bot_token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
 base_url = 'https://api.telegram.org/bot' + bot_token + '/setWebhook'
@@ -26,7 +24,12 @@ webhook_data = {'url': 'https://rgriverapp.herokuapp.com/telegram'}
 requests.post(base_url, data=webhook_data)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/')
+def index():
+    return 'Damn son'
+
+
+@app.route('/github', methods=['POST'])
 def handle_github_event():
     data = json.loads(flask.request.data)
     if not data:
@@ -46,21 +49,10 @@ def handle_github_event():
 @app.route('/telegram', methods=['POST'])
 def handle_telegram_event():
     data = json.loads(flask.request.data)
+    chat_id = data['chat']['id']
     text = data['message']['text']
+    bot_controller.send_message(chat_id, 'Damn son')
 
-
-class BotController:
-    def __init__(self):
-        self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
-        self.telegram_url = 'https://api.telegram.org/bot' + self.token
-
-    def send_message(self, chat_id, text):
-        params = {'chat_id': chat_id, 'text': text}
-        method = 'sendMessagee'
-        requests.post(self.telegram_url + method, params)
-"""
 
 if __name__ == '__main__':
-    server = Server()
-    server.run()
-    # app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)
