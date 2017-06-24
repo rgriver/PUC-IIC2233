@@ -7,13 +7,17 @@ class BotController:
     def __init__(self):
         self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
         self.telegram_url = 'https://api.telegram.org/bot' + self.token + '/'
+        self.chat_ids = []
 
     def send_message(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text}
         method = 'sendMessage'
         requests.post(self.telegram_url + method, params)
 
-    def process_message(self, command, *args):
+    def process_message(self, message, chat_id):
+        if chat_id not in self.chat_ids:
+            self.chat_ids.append(chat_id)
+        command = ''
         if command == '/get':
             pass
         elif command == '/post':
@@ -22,9 +26,35 @@ class BotController:
             pass
         elif command == '/close':
             pass
+        else:
+            self.send_message(chat_id, "'{}' is not a valid command.".
+                              format(command))
 
     def comment_on_issue(self, issue_num):
         pass
+
+    def send_message_to_all_users(self, message):
+        for chat_id in self.chat_ids:
+            self.send_message(chat_id, message)
+
+    def notify_of_issue_opening(self, issue):
+        try:
+            message = "[{}]\n".format(issue['user']['login'])  # author
+            message += "[#{} - {}]\n".format(issue['number'], issue['title'])
+            message += issue['body'] + '\n'
+            message += "[Link: {}]".format(issue['html_url'])
+            for chat_id in self.chat_ids:
+                self.send_message(chat_id, message)
+        except Exception as e:
+            for chat_id in self.chat_ids:
+                self.send_message(chat_id, 'INTERNAL SERVER ERROR: ' + str(e))
+            pass
+
+
+class RepositoryController:
+    def __init__(self):
+        self.repo_name = 'T07-test'
+
 
 bot_controller = BotController()
 app = flask.Flask(__name__)
@@ -40,10 +70,14 @@ requests.post(base_url, data=webhook_data)
 
 @app.route('/github', methods=['POST'])
 def handle_github_event():
-    data = json.loads(flask.request.data)
-    if not data:
-        return 'S'
-    action = data['action']
+    try:
+        data = json.loads(flask.request.data)
+        action = data['action']
+        if action is 'opened':
+            bot_controller.notify_of_issue_opening(data['issue'])
+    except Exception as e:
+        message = "[]"
+        bot_controller.send_message_to_all_users('')
     # data = {
     #     'event': 'issues',
 
@@ -60,13 +94,13 @@ def handle_telegram_event():
     chat_id = 375779180
     try:
         data = json.loads(flask.request.data)
-        # chat_id = data['chat']['id']
-        # text = data['message']['text']
+        text = data['message']['text']
         chat_id = data['message']['chat']['id']
         message = 'Chat id :' + str(chat_id)
     except Exception as e:
         message = 'INTERNAL SERVER ERROR: ' + str(e)
-    bot_controller.send_message(chat_id, message)
+    # bot_controller.send_message(chat_id, message)
+    bot_controller.process_message(chat_id, message)
     return flask.Response(status=200)
 
 
