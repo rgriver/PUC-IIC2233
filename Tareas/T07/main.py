@@ -14,10 +14,10 @@ class BotController:
         method = 'sendMessage'
         requests.post(self.telegram_url + method, params)
 
-    def process_message(self, message, chat_id):
+    def process_message(self, chat_id, message):
         if chat_id not in self.chat_ids:
             self.chat_ids.append(chat_id)
-        command = ''
+        command = 'nice'
         if command == '/get':
             pass
         elif command == '/post':
@@ -100,7 +100,7 @@ def handle_telegram_event():
     except Exception as e:
         message = 'INTERNAL SERVER ERROR: ' + str(e)
     # bot_controller.send_message(chat_id, message)
-    # bot_controller.process_message(chat_id, message)
+    bot_controller.process_message(chat_id, message)
     return flask.Response(status=200)
 
 
