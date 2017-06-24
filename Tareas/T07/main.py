@@ -6,7 +6,7 @@ import json
 class BotController:
     def __init__(self):
         self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
-        self.telegram_url = 'https://api.telegram.org/bot' + self.token
+        self.telegram_url = 'https://api.telegram.org/bot' + self.token + '/'
 
     def send_message(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text}
@@ -52,7 +52,7 @@ def handle_telegram_event():
     data = json.loads(flask.request.data)
     chat_id = data['chat']['id']
     text = data['message']['text']
-    bot_controller.send_message(375779180, 'Damn son')
+    bot_controller.send_message(chat_id, 'Damn son')
     return 'telegram section'
 
 
