@@ -16,12 +16,13 @@ class BotController:
 app = flask.Flask(__name__)
 bot_controller = BotController()
 
-
+"""
 bot_token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
 base_url = 'https://api.telegram.org/bot' + bot_token + '/setWebhook'
 webhook_data = {'url': 'https://rgriverapp.herokuapp.com/telegram'}
 # webhook_data = {'url': 'http://0.0.0.0:8080/telegram'}
 requests.post(base_url, data=webhook_data)
+"""
 
 
 @app.route('/')
@@ -46,12 +47,13 @@ def handle_github_event():
     return action
 
 
-@app.route('/telegram', methods=['POST'])
+@app.route('/telegram')
 def handle_telegram_event():
     data = json.loads(flask.request.data)
     chat_id = data['chat']['id']
     text = data['message']['text']
     bot_controller.send_message(chat_id, 'Damn son')
+    return 'telegram section'
 
 
 if __name__ == '__main__':
