@@ -3,11 +3,29 @@ import requests
 import json
 
 
+class RepositoryController:
+    def __init__(self):
+        self.repo_name = 'T07-test'
+
+    def create_comment(self, issue_num, message):
+        url = 'https://api.github.com/repos/rgriver/{}/issues/{}/comments'.\
+            format(self.repo_name, issue_num)
+        data = {'body': message}
+        requests.post(url, json.dumps(data))
+
+    def assign_label(self):
+        pass
+
+    def close_issue(self):
+        pass
+
+
 class BotController:
     def __init__(self):
         self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
         self.telegram_url = 'https://api.telegram.org/bot' + self.token + '/'
         self.chat_ids = []
+        self.repo_controller = RepositoryController()
 
     def send_message(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text}
@@ -17,11 +35,11 @@ class BotController:
     def process_message(self, chat_id, message):
         if chat_id not in self.chat_ids:
             self.chat_ids.append(chat_id)
-        command = 'nice'
+        command = '/post'
         if command == '/get':
             pass
         elif command == '/post':
-            pass
+            self.repo_controller.create_comment(4, 'My comment')
         elif command == '/label':
             pass
         elif command == '/close':
@@ -48,11 +66,6 @@ class BotController:
             for chat_id in self.chat_ids:
                 self.send_message(chat_id, 'INTERNAL SERVER ERROR: ' + str(e))
             pass
-
-
-class RepositoryController:
-    def __init__(self):
-        self.repo_name = 'T07-test'
 
 
 bot_controller = BotController()
