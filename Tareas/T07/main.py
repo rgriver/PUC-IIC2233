@@ -48,10 +48,9 @@ def handle_telegram_event():
     chat_id = data['chat']['id']
     text = data['message']['text']
     bot_controller.send_message(375779180, 'Damn son')
-    return 'telegram section'
 
 
-@app.route('/', methods=['POST'])
+@app.route('/')
 def index():
     # bot_controller.send_message(375779180, 'sendMessage')
     return 'ok'
