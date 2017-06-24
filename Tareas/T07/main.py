@@ -25,12 +25,6 @@ requests.post(base_url, data=webhook_data)
 """
 
 
-@app.route('/')
-def index():
-    # bot_controller.send_message(375779180, 'sendMessage')
-    return 'ok'
-
-
 @app.route('/github', methods=['POST'])
 def handle_github_event():
     data = json.loads(flask.request.data)
@@ -53,8 +47,14 @@ def handle_telegram_event():
     data = json.loads(flask.request.data)
     chat_id = data['chat']['id']
     text = data['message']['text']
-    bot_controller.send_message(chat_id, 'Damn son')
+    bot_controller.send_message(375779180, 'Damn son')
     return 'telegram section'
+
+
+@app.route('/')
+def index():
+    # bot_controller.send_message(375779180, 'sendMessage')
+    return 'ok'
 
 
 if __name__ == '__main__':
