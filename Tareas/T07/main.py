@@ -76,8 +76,8 @@ def handle_github_event():
         if action is 'opened':
             bot_controller.notify_of_issue_opening(data['issue'])
     except Exception as e:
-        message = "[]"
-        bot_controller.send_message_to_all_users('')
+        message = str(e)
+        bot_controller.send_message_to_all_users(message)
     # data = {
     #     'event': 'issues',
 
@@ -86,7 +86,7 @@ def handle_github_event():
     # print('sd')
     #req = requests.post('https://api.github.com/repos/rgriver/T07/hooks',
     #                    data=data)
-    return 'ok'
+    return flask.Response(status=200)
 
 
 @app.route('/telegram', methods=['POST'])
@@ -100,7 +100,7 @@ def handle_telegram_event():
     except Exception as e:
         message = 'INTERNAL SERVER ERROR: ' + str(e)
     # bot_controller.send_message(chat_id, message)
-    bot_controller.process_message(chat_id, message)
+    # bot_controller.process_message(chat_id, message)
     return flask.Response(status=200)
 
 
