@@ -13,6 +13,19 @@ class BotController:
         method = 'sendMessage'
         requests.post(self.telegram_url + method, params)
 
+    def process_message(self, command, *args):
+        if command == '/get':
+            pass
+        elif command == '/post':
+            pass
+        elif command == '/label':
+            pass
+        elif command == '/close':
+            pass
+
+    def comment_on_issue(self, issue_num):
+        pass
+
 bot_controller = BotController()
 app = flask.Flask(__name__)
 
@@ -41,7 +54,7 @@ def handle_github_event():
     #                    data=data)
     return action
 
-
+"""
 @app.route('/telegram', methods=['POST'])
 def handle_telegram_event():
     data = json.loads(flask.request.data)
@@ -49,6 +62,7 @@ def handle_telegram_event():
     text = data['message']['text']
     bot_controller.send_message(375779180, 'Damn son')
     return 'ok'
+"""
 
 
 @app.route('/', methods=['POST'])
