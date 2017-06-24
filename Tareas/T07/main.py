@@ -57,11 +57,11 @@ def handle_github_event():
 
 @app.route('/telegram', methods=['POST'])
 def handle_telegram_event():
-    return flask.Response(status=200)
     data = json.loads(flask.request.data)
     chat_id = data['chat']['id']
     text = data['message']['text']
     bot_controller.send_message(375779180, 'Damn son')
+    return flask.Response(status=200)
 
 
 @app.route('/')
