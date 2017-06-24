@@ -25,9 +25,10 @@ requests.post(base_url, data=webhook_data)
 """
 
 
-@app.route('/', methods=['POST'])
+@app.route('/')
 def index():
-    bot_controller.send_message(375779180, 'sendMessage')
+    # bot_controller.send_message(375779180, 'sendMessage')
+    return 'ok'
 
 
 @app.route('/github', methods=['POST'])
