@@ -73,6 +73,7 @@ def handle_github_event():
     try:
         data = json.loads(flask.request.data)
         action = data['action']
+        bot_controller.send_message(375779180, str(action))
         if action is 'opened':
             bot_controller.notify_of_issue_opening(data['issue'])
     except Exception as e:
