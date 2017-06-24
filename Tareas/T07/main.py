@@ -63,8 +63,8 @@ def handle_telegram_event():
         chat_id = data['chat']['id']
         # text = data['message']['text']
         message = "We're good"
-    except Exception:
-        message = 'Error'
+    except Exception as e:
+        message = str(e)
     bot_controller.send_message(chat_id, message)
     return flask.Response(status=200)
 
