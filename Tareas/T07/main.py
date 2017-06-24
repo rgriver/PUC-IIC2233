@@ -54,7 +54,7 @@ def handle_github_event():
     #                    data=data)
     return action
 
-"""
+
 @app.route('/telegram', methods=['POST'])
 def handle_telegram_event():
     data = json.loads(flask.request.data)
@@ -62,15 +62,10 @@ def handle_telegram_event():
     text = data['message']['text']
     bot_controller.send_message(375779180, 'Damn son')
     return 'ok'
-"""
 
 
-@app.route('/', methods=['POST'])
+@app.route('/')
 def index():
-    data = json.loads(flask.request.data)
-    chat_id = data['chat']['id']
-    text = data['message']['text']
-    bot_controller.send_message(375779180, 'Damn son')
     return 'ok'
 
 
