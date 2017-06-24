@@ -63,7 +63,7 @@ def handle_telegram_event():
         # chat_id = data['chat']['id']
         # text = data['message']['text']
         chat_id = data['message']['chat']['id']
-        message = 'Chat id :' + chat_id
+        message = 'Chat id :' + str(chat_id)
     except Exception as e:
         message = 'INTERNAL SERVER ERROR: ' + str(e)
     bot_controller.send_message(chat_id, message)
