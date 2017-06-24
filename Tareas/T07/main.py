@@ -72,7 +72,7 @@ requests.post(base_url, data=webhook_data)
 def handle_github_event():
     try:
         data = json.loads(flask.request.data)
-        bot_controller.send_message(375779180, str(data.keys()))
+        bot_controller.send_message(375779180, "We're good.")
         # action = data['action']
         # if action is 'opened':
         #     bot_controller.notify_of_issue_opening(data['issue'])
