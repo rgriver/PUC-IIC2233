@@ -72,9 +72,10 @@ requests.post(base_url, data=webhook_data)
 def handle_github_event():
     try:
         data = json.loads(flask.request.data)
-        action = data['action']
-        if action is 'opened':
-            bot_controller.notify_of_issue_opening(data['issue'])
+        bot_controller.send_message(375779180, str(data.keys()))
+        # action = data['action']
+        # if action is 'opened':
+        #     bot_controller.notify_of_issue_opening(data['issue'])
     except Exception as e:
         message = str(e)
         bot_controller.send_message_to_all_users(message)
