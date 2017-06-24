@@ -71,7 +71,7 @@ requests.post(base_url, data=webhook_data)
 @app.route('/github', methods=['POST'])
 def handle_github_event():
     try:
-        data = flask.request.data  # json.loads(flask.request.data)
+        data = json.loads(flask.request.data)
         bot_controller.send_message(375779180, str(data.keys()))
         # action = data['action']
         # if action is 'opened':
