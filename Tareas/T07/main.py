@@ -57,13 +57,13 @@ def handle_github_event():
 
 @app.route('/telegram', methods=['POST'])
 def handle_telegram_event():
+    chat_id = 375779180
     try:
-        data = json.loads(flask.request.data)
+        data = flask.request.data
         chat_id = data['chat']['id']
         # text = data['message']['text']
         message = "We're good"
     except Exception:
-        chat_id = 375779180
         message = 'Error'
     bot_controller.send_message(chat_id, message)
     return flask.Response(status=200)
