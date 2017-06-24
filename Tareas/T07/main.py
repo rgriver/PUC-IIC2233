@@ -62,9 +62,10 @@ def handle_telegram_event():
         data = json.loads(flask.request.data)
         # chat_id = data['chat']['id']
         # text = data['message']['text']
-        message = str(data.keys())
+        chat_id = data['message']['chat']['id']
+        message = 'Chat id :' + chat_id
     except Exception as e:
-        message = str(e)
+        message = 'INTERNAL SERVER ERROR: ' + str(e)
     bot_controller.send_message(chat_id, message)
     return flask.Response(status=200)
 
