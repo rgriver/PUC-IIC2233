@@ -59,8 +59,8 @@ def handle_github_event():
 def handle_telegram_event():
     chat_id = 375779180
     try:
-        data = flask.request.data
-        chat_id = data['chat']['id']
+        data = json.loads(flask.request.data)
+        # chat_id = data['chat']['id']
         # text = data['message']['text']
         message = "We're good"
     except Exception as e:
