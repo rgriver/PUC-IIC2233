@@ -6,12 +6,15 @@ import json
 class RepositoryController:
     def __init__(self):
         self.repo_name = 'T07-test'
+        self.credentials = ('T07bot',
+                            '8b9c17535a9ba3f80c5f0da2306b3e2bf951c493')
 
     def create_comment(self, issue_num, message):
         url = 'https://api.github.com/repos/rgriver/{}/issues/{}/comments'.\
             format(self.repo_name, issue_num)
         data = {'body': message}
-        requests.post(url, json.dumps(data))
+        r = requests.post(url, json.dumps(data), auth=self.credentials)
+        return r.status_code
 
     def assign_label(self):
         pass
@@ -39,7 +42,11 @@ class BotController:
         if command == '/get':
             pass
         elif command == '/post':
-            self.repo_controller.create_comment(4, 'My comment')
+            status_code = self.repo_controller.create_comment(4, 'My comment')
+            if status_code == 201:
+                self.send_message(chat_id, 'New comment successfully created!')
+            else:
+                self.send_message(chat_id, "Couldn't create a new comment.")
         elif command == '/label':
             pass
         elif command == '/close':
