@@ -52,7 +52,7 @@ def handle_github_event():
     # print('sd')
     #req = requests.post('https://api.github.com/repos/rgriver/T07/hooks',
     #                    data=data)
-    return action
+    return 'ok'
 
 
 @app.route('/telegram', methods=['POST'])
