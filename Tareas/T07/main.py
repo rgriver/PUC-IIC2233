@@ -27,8 +27,7 @@ class BotController:
         elif command == '/close':
             pass
         else:
-            self.send_message(chat_id, "'{}' is not a valid command.".
-                              format(command))
+            self.send_message(375779180, str(self.chat_ids))
 
     def comment_on_issue(self, issue_num):
         pass
@@ -73,8 +72,7 @@ def handle_github_event():
     try:
         data = json.loads(flask.request.data)
         action = data['action']
-        bot_controller.send_message(375779180, str(action))
-        if action is 'opened':
+        if str(action) == 'opened':
             bot_controller.notify_of_issue_opening(data['issue'])
     except Exception as e:
         message = str(e)
