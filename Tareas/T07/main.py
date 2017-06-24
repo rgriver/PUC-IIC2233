@@ -13,8 +13,8 @@ class BotController:
         method = 'sendMessage'
         requests.post(self.telegram_url + method, params)
 
-app = flask.Flask(__name__)
 bot_controller = BotController()
+app = flask.Flask(__name__)
 
 """
 bot_token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
