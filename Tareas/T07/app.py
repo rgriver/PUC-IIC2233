@@ -41,4 +41,3 @@ class App(flask.Flask):
         for chat_id in self.bot_controller.chat_ids:
             text += '    ' + str(chat_id) + '\n'
         return text
-
