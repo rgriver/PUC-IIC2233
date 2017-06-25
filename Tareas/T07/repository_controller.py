@@ -57,13 +57,15 @@ class RepositoryController:
         comments_url = 'https://api.github.com/repos/{}/{}/issues/{}/comments'\
             .format(self.owner, self.repo_name, issue_num)
         cr = requests.get(comments_url)
-        if r.status_code == 200:
+        if cr.status_code == 200:
             comments_text = ''
-            for comment in cr.json():
-                comments_text += '{} commented at {}:\n{}\n\n'\
-                    .format(comment['user']['login'],
-                            comment['created_at'],
-                            comment['body'])
+            if cr.json():
+                comments_text += '*** Comments ***\n'
+                for comment in cr.json():
+                    comments_text += '{} commented at {}:\n{}\n\n'\
+                        .format(comment['user']['login'],
+                                comment['created_at'],
+                                comment['body'])
         else:
             return "Sorry, I couldn't complete your request (Error {}).".\
                 format(cr.status_code)
@@ -72,7 +74,6 @@ class RepositoryController:
             message = "[{}]\n\n".format(issue['user']['login'])  # author
             message += "[#{} - {}]\n\n".format(issue['number'], issue['title'])
             message += issue['body'] + '\n\n'
-            message += '* Comments *\n'
             message += comments_text
             message += "[Link: {}]".format(issue['html_url'])
         else:
