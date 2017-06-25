@@ -146,11 +146,11 @@ class MyApp(flask.Flask):
         super(MyApp, self).__init__(x)
         self.bot_controller = BotController()
         self.add_url_rule('/', view_func=self.index)
-        # self.add_url_rule('/github', view_func=self.handle_github_event,
-        #                   methods=['POST'])
-        # self.add_url_rule('/telegram', view_func=self.handle_telegram_event,
-        #                   methods=['POST'])
-    """
+        self.add_url_rule('/github', view_func=self.handle_github_event,
+                          methods=['POST'])
+        self.add_url_rule('/telegram', view_func=self.handle_telegram_event,
+                          methods=['POST'])
+
     def handle_github_event(self):
         try:
             data = json.loads(flask.request.data)
@@ -173,7 +173,7 @@ class MyApp(flask.Flask):
         # bot_controller.send_message(chat_id, message)
         self.bot_controller.process_message(chat_id, message)
         return flask.Response(status=200)
-    """
+
     def index(self):
         """
         text = "Lista de ID's:\n"
