@@ -37,7 +37,7 @@ class App(flask.Flask):
         return flask.Response(status=200)
 
     def index(self):
-        text = "Registro de ID's de chats:\n"
+        text = "Registro de ID's de chats: "
         for chat_id in self.bot_controller.chat_ids:
-            text += '    ' + str(chat_id) + '\n'
+            text += str(chat_id) + ', '
         return text
