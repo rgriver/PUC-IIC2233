@@ -3,9 +3,9 @@ import json
 from bot_controller import BotController
 
 
-class MyApp(flask.Flask):
+class App(flask.Flask):
     def __init__(self, x):
-        super(MyApp, self).__init__(x)
+        super(App, self).__init__(x)
         self.bot_controller = BotController()
         self.add_url_rule('/', view_func=self.index)
         self.add_url_rule('/github', view_func=self.handle_github_event,
