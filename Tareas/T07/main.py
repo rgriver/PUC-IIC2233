@@ -77,7 +77,8 @@ class CommandInterpreter:
             re.compile(r'^(/label)\s+([0-9]+)\s+([a-zA-Z0-9\s]+)$')
         self.close_pattern = re.compile(r'^(/close)\s+([0-9]+)$')
 
-    def process_text(self, text):
+    def process_text(self, raw_text):
+        text = raw_text.strip()
         groups = ('Error', "Sorry, I didn't get that.")
         if self.get_pattern.match(text):
             groups = self.get_pattern.match(text).groups()
