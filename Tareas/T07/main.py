@@ -118,7 +118,7 @@ class BotController:
             message = self.repo_controller.close_issue(*groups[1:])
         else:
             message = groups[0]
-        self.send_message(chat_id, input_message)
+        self.send_message(chat_id, message)
 
     def comment_on_issue(self, issue_num):
         pass
@@ -179,9 +179,8 @@ def handle_telegram_event():
     chat_id = 375779180
     try:
         data = json.loads(flask.request.data)
-        text = data['message']['text']
+        message = data['message']['text']
         chat_id = data['message']['chat']['id']
-        message = 'Chat id :' + str(chat_id)
     except Exception as e:
         message = 'INTERNAL SERVER ERROR: ' + str(e)
     # bot_controller.send_message(chat_id, message)
