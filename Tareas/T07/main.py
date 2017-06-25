@@ -118,7 +118,7 @@ class BotController:
             message = self.repo_controller.close_issue(*groups[1:])
         else:
             message = groups[0]
-        self.send_message(chat_id, message)
+        self.send_message(chat_id, input_message)
 
     def comment_on_issue(self, issue_num):
         pass
