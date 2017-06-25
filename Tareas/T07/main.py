@@ -142,8 +142,8 @@ class BotController:
 
 
 class MyApp(flask.Flask):
-    def __init__(self):
-        super(MyApp, self).__init__(__name__)
+    def __init__(self, x):
+        super(MyApp, self).__init__(x)
         self.bot_controller = BotController()
         self.add_url_rule('/', view_func=self.index)
         # self.add_url_rule('/github', view_func=self.handle_github_event,
@@ -229,14 +229,9 @@ def index():
 
 """
 
-app = flask.Flask(__name__)
-
-
-@app.route('/')
-def index():
-    return 'ok'
+my_app = MyApp(__name__)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    my_app.run(host='0.0.0.0', port=8080)
     # app = MyApp()
     # app.run(host='0.0.0.0', port=8080)
