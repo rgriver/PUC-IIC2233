@@ -1,26 +1,93 @@
 import flask
 import requests
 import json
+import re
 
 
 class RepositoryController:
     def __init__(self):
+        self.owner = 'rgriver'
         self.repo_name = 'T07-test'
         self.credentials = ('T07bot',
                             '8b9c17535a9ba3f80c5f0da2306b3e2bf951c493')
+        self.owner_credentials = ('rgriver',
+                                  '3e99ab62d354ecc3e7ff05eb949524895fef15fe')
 
     def create_comment(self, issue_num, message):
-        url = 'https://api.github.com/repos/rgriver/{}/issues/{}/comments'.\
-            format(self.repo_name, issue_num)
+        url = 'https://api.github.com/repos/{}/{}/issues/{}/comments'.\
+            format(self.owner, self.repo_name, issue_num)
         data = {'body': message}
         r = requests.post(url, json.dumps(data), auth=self.credentials)
-        return r.status_code
+        if r.status_code == 201:
+            message = 'New comment created!'
+        else:
+            message = "Sorry, I couldn't create your comment."
+        return message
 
-    def assign_label(self):
-        pass
+    def add_label(self, issue_num, label):
+        url = 'https://api.github.com/repos/{}/{}/issues/{}/labels'. \
+            format(self.owner, self.repo_name, issue_num)
+        data = [label]
+        r = requests.post(url, data=json.dumps(data), auth=self.credentials)
+        if r.status_code == 200:
+            message = "Label '{}' added to issue #{}.".format(label, issue_num)
+        else:
+            message = "Sorry, I couldn't add the label you provided."
+        return message
 
-    def close_issue(self):
-        pass
+    def close_issue(self, issue_num):
+        url = 'https://api.github.com/repos/{}/{}/issues/{}'. \
+            format(self.owner, self.repo_name, issue_num)
+        r = requests.get(url)
+        if r.status_code != 200:
+            return "Couldn't complete the requested command."
+        if r.json()['state'] == 'closed':
+            return 'This issue is already closed.'
+        url = 'https://api.github.com/repos/{}/{}/issues/{}'\
+            .format(self.owner, self.repo_name, issue_num)
+        data = {'state': 'closed'}
+        r = requests.patch(url, data=json.dumps(data), auth=self.credentials)
+        if r.status_code == 200:
+            return 'Issue #{} closed!'.format(issue_num)
+        else:
+            return "Sorry, I couldn't close the specified issue."
+
+    def get_issue(self, issue_num):
+        url = 'https://api.github.com/repos/{}/{}/issues/{}'.\
+            format(self.owner, self.repo_name, issue_num)
+        r = requests.get(url)
+        if r.status_code == 200:
+            issue = r.json()
+            message = "[{}]\n".format(issue['user']['login'])
+            message += "[#{} - {}]\n".format(issue['number'], issue['title'])
+            message += issue['body'] + '\n'
+            message += "[Link: {}]".format(issue['html_url'])
+        else:
+            message = \
+                "Sorry, I couldn't get the issue you requested (Error {}).".\
+                format(r.status_code)
+        return message
+
+
+class CommandInterpreter:
+    def __init__(self):
+        self.get_pattern = re.compile(r'^(/get)\s+([0-9]+)$')
+        self.post_pattern = re.compile(r'^(/post)\s+([0-9]+)\s+[*](.+)$')
+        self.label_pattern = \
+            re.compile(r'^(/label)\s+([0-9]+)\s+([a-zA-Z0-9\s]+)$')
+        self.close_pattern = re.compile(r'^(/close)\s+([0-9]+)$')
+
+    def process_text(self, text):
+        groups = ('Error', "Sorry, I didn't get that.")
+        if self.get_pattern.match(text):
+            groups = self.get_pattern.match(text).groups()
+        elif self.post_pattern.match(text):
+            groups = self.post_pattern.match(text).groups()
+        elif self.label_pattern.match(text):
+            groups = self.label_pattern.match(text).groups()
+        elif self.close_pattern.match(text):
+            groups = self.close_pattern.match(text).groups()
+        return groups
 
 
 class BotController:
@@ -29,6 +96,7 @@ class BotController:
         self.telegram_url = 'https://api.telegram.org/bot' + self.token + '/'
         self.chat_ids = []
         self.repo_controller = RepositoryController()
+        self.command_interpreter = CommandInterpreter()
 
     def send_message(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text}
@@ -38,21 +106,18 @@ class BotController:
     def process_message(self, chat_id, message):
         if chat_id not in self.chat_ids:
             self.chat_ids.append(chat_id)
-        command = '/post'
-        if command == '/get':
-            pass
-        elif command == '/post':
-            status_code = self.repo_controller.create_comment(4, 'My comment')
-            if status_code == 201:
-                self.send_message(chat_id, 'New comment successfully created!')
-            else:
-                self.send_message(chat_id, "Couldn't create a new comment.")
-        elif command == '/label':
-            pass
-        elif command == '/close':
+        groups = self.command_interpreter.process_text(message)
+        if groups[0] == '/get':
+            message = self.repo_controller.get_issue(*groups[1:])
+        elif groups[0] == '/post':
+            message = self.repo_controller.create_comment(*groups[1:])
+        elif groups[0] == '/label':
+            message = self.repo_controller.add_label(*groups[1:])
+        elif groups[0] == '/close':
             pass
         else:
-            self.send_message(375779180, str(self.chat_ids))
+            message = groups[1]
+        self.send_message(chat_id, message)
 
     def comment_on_issue(self, issue_num):
         pass
