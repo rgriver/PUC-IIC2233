@@ -54,14 +54,28 @@ class RepositoryController:
         url = 'https://api.github.com/repos/{}/{}/issues/{}'.\
             format(self.owner, self.repo_name, issue_num)
         r = requests.get(url)
+        comments_url = 'https://api.github.com/repos/{}/{}/issues/{}/comments'\
+            .format(self.owner, self.repo_name, issue_num)
+        cr = requests.get(comments_url)
+        if r.status_code == 200:
+            comments_text = ''
+            for comment in cr.json():
+                comments_text += '{} commented at {}:\n{}\n\n'\
+                    .format(comment['user']['login'],
+                            comment['created_at'],
+                            comment['body'])
+        else:
+            return "Sorry, I couldn't complete your request (Error {}).".\
+                format(cr.status_code)
         if r.status_code == 200:
             issue = r.json()
-            message = "[{}]\n".format(issue['user']['login'])
-            message += "[#{} - {}]\n".format(issue['number'], issue['title'])
-            message += issue['body'] + '\n'
+            message = "[{}]\n\n".format(issue['user']['login'])  # author
+            message += "[#{} - {}]\n\n".format(issue['number'], issue['title'])
+            message += issue['body'] + '\n\n'
+            message += '* Comments *\n'
+            message += comments_text
             message += "[Link: {}]".format(issue['html_url'])
         else:
-            message = \
-                "Sorry, I couldn't get the issue you requested (Error {}).".\
+            message = "Sorry, I couldn't complete your request (Error {}).".\
                 format(r.status_code)
         return message
