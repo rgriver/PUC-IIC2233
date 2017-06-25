@@ -104,10 +104,10 @@ class BotController:
         method = 'sendMessage'
         requests.post(self.telegram_url + method, params)
 
-    def process_message(self, chat_id, message):
+    def process_message(self, chat_id, input_message):
         if chat_id not in self.chat_ids:
             self.chat_ids.append(chat_id)
-        groups = self.command_interpreter.process_text(message)
+        groups = self.command_interpreter.process_text(input_message)
         if groups[0] == '/get':
             message = self.repo_controller.get_issue(*groups[1:])
         elif groups[0] == '/post':
@@ -115,9 +115,9 @@ class BotController:
         elif groups[0] == '/label':
             message = self.repo_controller.add_label(*groups[1:])
         elif groups[0] == '/close':
-            pass
+            message = self.repo_controller.close_issue(*groups[1:])
         else:
-            message = groups[1]
+            message = groups[0]
         self.send_message(chat_id, message)
 
     def comment_on_issue(self, issue_num):
