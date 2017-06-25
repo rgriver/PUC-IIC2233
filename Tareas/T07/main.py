@@ -141,9 +141,9 @@ class BotController:
             pass
 
 
-class App(flask.Flask):
+class MyApp(flask.Flask):
     def __init__(self):
-        super(App, self).__init__(__name__)
+        super(MyApp, self).__init__(__name__)
         self.bot_controller = BotController()
         self.configure_routes()
 
@@ -232,5 +232,5 @@ def index():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=8080)
-    app = App()
+    app = MyApp()
     app.run(host='0.0.0.0', port=8080)
