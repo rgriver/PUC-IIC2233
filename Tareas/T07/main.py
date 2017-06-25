@@ -175,10 +175,13 @@ class MyApp(flask.Flask):
         return flask.Response(status=200)
 
     def index(self):
+        """
         text = "Lista de ID's:\n"
         for chat_id in self.bot_controller.chat_ids:
             text += str(chat_id) + '\n'
         return text
+        """
+        return 'ok'
 
 """
 bot_controller = BotController()
