@@ -175,10 +175,13 @@ class App(flask.Flask):
 
         @self.route('/')
         def index():
+            """
             text = "Lista de ID's:\n"
             for chat_id in self.bot_controller.chat_ids:
                 text += str(chat_id) + '\n'
             return text
+            """
+            return 'ok'
 
 """
 bot_controller = BotController()
