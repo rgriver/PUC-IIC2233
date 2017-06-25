@@ -40,7 +40,7 @@ class RepositoryController:
             format(self.owner, self.repo_name, issue_num)
         r = requests.get(url)
         if r.status_code != 200:
-            return "Couldn't complete the requested command."
+            return "It seems that the provided issue doesn't exist."
         if r.json()['state'] == 'closed':
             return 'This issue is already closed.'
         url = 'https://api.github.com/repos/{}/{}/issues/{}'\
@@ -117,7 +117,7 @@ class BotController:
         elif groups[0] == '/close':
             message = self.repo_controller.close_issue(*groups[1:])
         else:
-            message = groups[0]
+            message = groups[1]
         self.send_message(chat_id, message)
 
     def comment_on_issue(self, issue_num):
@@ -141,16 +141,48 @@ class BotController:
             pass
 
 
-bot_controller = BotController()
-app = flask.Flask(__name__)
+class App(flask.Flask):
+    def __init__(self):
+        super(App, self).__init__(__name__)
+        self.bot_controller = BotController()
+        self.configure_routes()
+
+    def configure_routes(self):
+        @self.route('/github', methods=['POST'])
+        def handle_github_event():
+            try:
+                data = json.loads(flask.request.data)
+                action = data['action']
+                if str(action) == 'opened':
+                    self.bot_controller.notify_of_issue_opening(data['issue'])
+            except Exception as e:
+                message = str(e)
+                self.bot_controller.send_message_to_all_users(message)
+            return flask.Response(status=200)
+
+        @self.route('/telegram', methods=['POST'])
+        def handle_telegram_event():
+            chat_id = 375779180
+            try:
+                data = json.loads(flask.request.data)
+                message = data['message']['text']
+                chat_id = data['message']['chat']['id']
+            except Exception as e:
+                message = 'INTERNAL SERVER ERROR: ' + str(e)
+            # bot_controller.send_message(chat_id, message)
+            self.bot_controller.process_message(chat_id, message)
+            return flask.Response(status=200)
+
+        @self.route('/')
+        def index():
+            text = "Lista de ID's:\n"
+            for chat_id in self.bot_controller.chat_ids:
+                text += str(chat_id) + '\n'
+            return text
 
 """
-bot_token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
-base_url = 'https://api.telegram.org/bot' + bot_token + '/setWebhook'
-webhook_data = {'url': 'https://rgriverapp.herokuapp.com/telegram'}
-# webhook_data = {'url': 'http://0.0.0.0:8080/telegram'}
-requests.post(base_url, data=webhook_data)
-"""
+bot_controller = BotController()
+app = flask.Flask(__name__)
 
 
 @app.route('/github', methods=['POST'])
@@ -192,6 +224,10 @@ def handle_telegram_event():
 def index():
     return 'ok'
 
+"""
+
 
 if __name__ == '__main__':
+    # app.run(host='0.0.0.0', port=8080)
+    app = App()
     app.run(host='0.0.0.0', port=8080)
