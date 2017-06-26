@@ -26,7 +26,7 @@ class App(flask.Flask):
                     data['issue']['body'])
                 if solution is not None:
                     issue_num = data['issue']['number']
-                    self.repo_controller.add_comment(issue_num, solution)
+                    self.repo_controller.create_comment(issue_num, solution)
                 self.bot_controller.notify_of_issue_opening(data['issue'])
         except Exception as e:
             message = str(e)
