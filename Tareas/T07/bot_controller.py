@@ -18,7 +18,8 @@ class BotController:
 
     def process_message(self, chat_id, input_message):
         if chat_id not in self.chat_ids:
-            self.chat_ids.append(chat_id)
+            self.add_chat(chat_id)
+            # self.chat_ids.append(chat_id)
         groups = self.command_interpreter.process_text(input_message)
         if groups[0] == '/get':
             message = self.repo_controller.get_issue(*groups[1:])
@@ -45,8 +46,24 @@ class BotController:
             message += "[#{} - {}]\n".format(issue['number'], issue['title'])
             message += issue['body'] + '\n'
             message += "[Link: {}]".format(issue['html_url'])
-            for chat_id in self.chat_ids:
+            chat_ids = self.get_chats()
+            for chat_id in chat_ids:
                 self.send_message(chat_id, message)
         except Exception as e:
             for chat_id in self.chat_ids:
                 self.send_message(chat_id, 'INTERNAL SERVER ERROR: ' + str(e))
+
+    @staticmethod
+    def add_chat(chat_id):
+        with open('chats.txt', 'a') as f:
+            f.write(str(chat_id) + '\n')
+
+    @staticmethod
+    def get_chats():
+        try:
+            with open('chats.txt', 'r') as f:
+                data = (int(i.strip()) for i in f.readlines())
+        except Exception:
+            data = []
+        return data
+
