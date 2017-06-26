@@ -4,11 +4,11 @@ from command_interpreter import CommandInterpreter
 
 
 class BotController:
-    def __init__(self):
+    def __init__(self, repo_controller):
         self.token = '415058552:AAH_h5aHopemW9hqMhEZpq1Ajg5LLRunhAM'
         self.telegram_url = 'https://api.telegram.org/bot' + self.token + '/'
         self.chat_ids = []
-        self.repo_controller = RepositoryController()
+        self.repo_controller = repo_controller
         self.command_interpreter = CommandInterpreter()
 
     def send_message(self, chat_id, text):
