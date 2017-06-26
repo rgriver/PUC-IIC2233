@@ -80,3 +80,13 @@ class RepositoryController:
             message = "Sorry, I couldn't complete your request (Error {}).".\
                 format(r.status_code)
         return message
+
+    def add_google_label(self, issue_num):
+        comments_url = 'https://api.github.com/repos/{}/{}/issues/{}/comments' \
+            .format(self.owner, self.repo_name, issue_num)
+        cr = requests.get(comments_url)
+        if cr.status_code == 200:
+            if cr.json():
+                for comment in cr.json():
+
+
