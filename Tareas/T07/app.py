@@ -21,15 +21,16 @@ class App(flask.Flask):
         try:
             data = json.loads(flask.request.data)
             action = data['action']
+            issue_num = data['issue']['number']
             if str(action) == 'opened':
                 solution = self.issue_helper.find_solution(
                     data['issue']['body'])
                 if solution is not None:
-                    issue_num = data['issue']['number']
                     self.repo_controller.create_comment(issue_num, solution)
+                    self.repo_controller.add_auto_issue(issue_num)
                 self.bot_controller.notify_of_issue_opening(data['issue'])
             elif str(action) == 'closed':
-                pass
+                self.repo_controller.add_google_label(issue_num)
         except Exception as e:
             message = str(e)
             self.bot_controller.send_message_to_all_users(message)
