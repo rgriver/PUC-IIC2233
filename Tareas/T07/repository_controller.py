@@ -82,11 +82,41 @@ class RepositoryController:
         return message
 
     def add_google_label(self, issue_num):
-        comments_url = 'https://api.github.com/repos/{}/{}/issues/{}/comments' \
+        comments_url = 'https://api.github.com/repos/{}/{}/issues/{}/comments'\
             .format(self.owner, self.repo_name, issue_num)
         cr = requests.get(comments_url)
         if cr.status_code == 200:
             if cr.json():
-                for comment in cr.json():
+                if not self.check_issue(issue_num):
+                    return False
+                comments = cr.json()
+                user_names = [c['user']['login'] for c in comments]
+                if user_names[1:]:
+                    if not all(self.owner == username for username
+                               in user_names[1:]):
+                        return False
+                self.add_label(issue_num, 'Googleable')
+                return True
+        return False
 
+    @staticmethod
+    def add_auto_issue(issue_num):
+        with open('auto_issues.txt', 'a') as f:
+            f.write(str(issue_num) + '\n')
 
+    @staticmethod
+    def check_issue(issue_num):
+        try:
+            issue_commented = False
+            with open('auto_issues.txt', 'r') as f:
+                data = (int(i.strip()) for i in f.readlines())
+                with open('auto_issues.txt', 'w') as f:
+                    for i in data:
+                        if i == issue_num:
+                            issue_commented = True
+                            continue
+                        else:
+                            f.write(str(i) + '\n')
+            return issue_commented
+        except Exception:
+            return False
