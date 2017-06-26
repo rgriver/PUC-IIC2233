@@ -28,6 +28,8 @@ class App(flask.Flask):
                     issue_num = data['issue']['number']
                     self.repo_controller.create_comment(issue_num, solution)
                 self.bot_controller.notify_of_issue_opening(data['issue'])
+            elif str(action) == 'closed':
+                pass
         except Exception as e:
             message = str(e)
             self.bot_controller.send_message_to_all_users(message)
@@ -47,6 +49,6 @@ class App(flask.Flask):
 
     def index(self):
         text = "Registro de ID's de chats: "
-        for chat_id in self.bot_controller.chat_ids:
+        for chat_id in self.bot_controller.get_chats():
             text += str(chat_id) + ', '
         return text
