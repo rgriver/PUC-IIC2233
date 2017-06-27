@@ -15,7 +15,7 @@ Para guardar los IDs de los chats se escribe en un archivo de texto `chats.txt` 
 
 Debido al problema anterior, si la app se llega a reiniciar (tal vez por inactividad) se debe enviar un mensaje cualquiera para que el servidor reconozca al usuario otra vez (puede ser un comando).
 
-La lista de IDs de chats está disponible en https://rgriverapp.herokuapp.com/
+La lista de IDs de chats está disponible en https://rgriverapp.herokuapp.com/. Refresque la página y si no hay ningúna ID es porque la app se reinició.
 
 Para buscar el error se da prioridad a la busqueda de bloques de código inline. Si no hay error o simplemente no hay codigo de este estilo se buscan bloques de código de múltiples líneas.
 
