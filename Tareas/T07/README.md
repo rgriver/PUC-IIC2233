@@ -19,9 +19,13 @@ La lista de IDs de chats está disponible en https://rgriverapp.herokuapp.com/
 
 ## Clases
 `App`: Es la aplicacion Flask.
+
 `RepositoryController`: Se encarga de realiar los cambios en el repo.
+
 `BotController`: Recibe y envía los mensajes del usuario. Habla con `RepositoryController` para hacer los cambios en el repo.
+
 `CommandInterpreter`: Se encarga de interpretar el comando.
+
 `IssueHelper`: Intenta buscar una solución al error cuando corresponde.
 
 :)
